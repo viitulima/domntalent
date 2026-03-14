@@ -1,212 +1,414 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-
 <meta charset="UTF-8">
 <title>DOMN TALENT</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Audiowide&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <style>
 
+*{margin:0;padding:0;box-sizing:border-box;}
+
 body{
-  font-family:'Orbitron', sans-serif;
-  text-align:center;
-  color:white;
-  margin:0;
-  background:url("https://i.pinimg.com/1200x/57/2a/27/572a275aaa2ce87df412de827720aacf.jpg") no-repeat center center fixed;
-  background-size: cover;
-  position: relative;
-  overflow-x: hidden;
+font-family:'Orbitron',sans-serif;
+color:white;
+text-align:center;
+background:#FF0000;
+background-image:url("https://i.pinimg.com/originals/69/90/4e/69904eb7286381744eaa4ec08b96bce5.gif");
+background-size:cover;
+background-position:center;
 }
 
-/* Camada desfocada do fundo */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background: url("https://i.pinimg.com/1200x/57/2a/27/572a275aaa2ce87df412de827720aacf.jpg") no-repeat center center fixed;
-  background-size: cover;
-  filter: blur(6px) brightness(0.4); /* desfoque menor */
-  z-index: -1;
+body::before{
+content:"";
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.75);
+backdrop-filter:blur(4px);
+z-index:-1;
 }
 
-/* TITULO COM ANIMAÇÃO DE COR AZUL */
-h1{
-  font-size:48px;
-  margin-top:30px;
-  background: linear-gradient(90deg,#00e1ff,#0099ff,#00c896,#00e1ff);
-  background-size: 300%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: brilho 4s linear infinite;
+/* LOGO */
+
+.logo{
+font-family:'Audiowide';
+font-size:60px;
+margin-top:10px;
+letter-spacing:5px;
+background:linear-gradient(90deg,#FF0000,#FF0000,#FF0000,#FF0000,#FF0000);
+background-size:400%;
+-webkit-background-clip:text;
+color:transparent;
+animation:brilho 6s linear infinite;
+text-shadow:0 0 10px red,0 0 30px red,0 0 60px red;
 }
 
 @keyframes brilho{
-  0%{background-position:0%}
-  50%{background-position:100%}
-  100%{background-position:0%}
+0%{background-position:0%}
+100%{background-position:400%}
 }
 
+.categoria h2{
+margin-top:40px;
+font-size:28px;
+background:linear-gradient(90deg,#FF0000,#FF0000,#FF0000,#FF0000,#FF0000);
+background-size:300%;
+-webkit-background-clip:text;
+color:transparent;
+animation:brilho 5s linear infinite;
+}
+
+/* PRODUTOS */
+
 .produtos{
-display:flex;
-justify-content:center;
-gap:35px;
-padding:50px;
-flex-wrap:wrap;
+max-width:1100px;
+margin:auto;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:30px;
+padding:30px;
 }
 
 .produto{
 background:rgba(255,255,255,0.05);
-backdrop-filter:blur(12px);
-padding:22px;
-border-radius:14px;
-width:230px;
-transition:0.35s;
 border:1px solid rgba(255,255,255,0.1);
-box-shadow:0 8px 25px rgba(0,0,0,0.6);
+border-radius:12px;
+padding:18px;
+backdrop-filter:blur(10px);
+transition:transform 0.5s ease;
 }
 
 .produto:hover{
-transform:translateY(-10px) scale(1.03);
-box-shadow:0 0 25px #00c896;
+transform:scale(1.05);
+box-shadow:0 0 15px red,0 0 30px red;
 }
 
 .produto img{
 width:100%;
-height:130px;
-object-fit:cover;
-border-radius:8px;
-margin-bottom:10px;
-}
-
-.produto h3{
-font-size:16px;
-margin:8px 0;
+height:110px;
+object-fit:contain;
 }
 
 .produto p{
-font-size:20px;
-color:#00e1ff;
-margin:8px 0;
+color:#FF0000;
+font-size:18px;
+margin:8px;
 }
 
 button{
-padding:10px 20px;
+
+position:relative;
+overflow:hidden;
+
+background:#FF0000;
+
 border:none;
-background:linear-gradient(90deg,#00c896,#00e1ff);
 color:white;
-cursor:pointer;
+
+padding:10px 20px;
+
 border-radius:8px;
-margin-top:10px;
-font-weight:bold;
-transition:0.25s;
+
+cursor:pointer;
+
+}
+
+/* efeito LED passando */
+
+button::before{
+
+content:"";
+
+position:absolute;
+
+top:0;
+left:-100%;
+
+width:100%;
+height:100%;
+
+background:linear-gradient(
+120deg,
+transparent,
+rgba(255,255,255,0.8),
+transparent
+);
+
+animation:ledPassando 2s infinite;
+
+}
+
+/* animação */
+
+@keyframes ledPassando{
+
+0%{
+left:-100%;
+}
+
+100%{
+left:120%;
+}
+
+}
+
+/* brilho quando passa o mouse */
+
+button:hover{
+
+box-shadow:
+0 0 10px red,
+0 0 25px red,
+0 0 40px red;
+
 }
 
 button:hover{
-transform:scale(1.08);
-box-shadow:0 0 12px #00e1ff;
+
+box-shadow:
+0 0 10px red,
+0 0 25px red,
+0 0 50px red;
+
+}
+}
+
+button:hover{
+text-shadow: 0 0 10px red, 0 0 25px red;
+}
+
+/* CARRINHO */
+
+#botaoCarrinho{
+position:fixed;
+top:20px;
+right:20px;
+z-index:999;
+}
+
+#contadorCarrinho{
+background:red;
+border-radius:50%;
+padding:4px 8px;
+font-size:12px;
+font-weight:bold;
+}
+
+#paginaCarrinho{
+display:none;
+padding:20px;
 }
 
 #carrinho{
-max-width:650px;
+max-width:700px;
 margin:auto;
-margin-top:20px;
-background:rgba(0,0,0,0.5);
-padding:25px;
-border-radius:12px;
-border:1px solid rgba(255,255,255,0.08);
-box-shadow:0 10px 25px rgba(0,0,0,0.6);
-}
-
-#carrinho h2{
-margin-bottom:15px;
-color:#00e1ff;
+background:rgba(0,0,0,0.6);
+border-radius:14px;
+padding:30px;
 }
 
 .itemCarrinho{
 display:flex;
 justify-content:space-between;
-align-items:center;
-margin:12px 0;
+margin:10px 0;
 border-bottom:1px solid #333;
-padding-bottom:8px;
-font-size:14px;
-}
-
-.controles button{
-padding:4px 8px;
-font-size:12px;
-margin:0 2px;
-}
-
-.remover{
-background:#ff3b3b;
-}
-
-#carrinho h3{
-margin-top:18px;
-color:#00e1ff;
-}
-
-#areaPagamento{
-display:none;
-margin-top:40px;
-padding-bottom:40px;
-}
-
-#areaPagamento h2{
-color:#00e1ff;
+padding-bottom:6px;
 }
 
 #qrcode{
-margin-top:20px;
-display:flex;
-justify-content:center;
+margin:20px auto;
+width:250px;
 }
 
-textarea{
-margin-top:20px;
-border-radius:8px;
+#pixCopia{
+width:90%;
+margin-top:10px;
+}
+
+#msgPix{
+margin-top:10px;
+color:#00ff88;
+}
+/* VIDEO DEMONSTRAÇÃO */
+
+#videoDemo{
+position:fixed;
+bottom:20px;
+left:20px;
+width:340px;
+height:200px;
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.15);
+border-radius:12px;
+backdrop-filter:blur(10px);
+padding:8px;
+z-index:999;
+}
+
+#videoDemo iframe{
+width:100%;
+height:100%;
 border:none;
-padding:12px;
-background:#111;
-color:#00e1ff;
-width:80%;
-max-width:600px;
-font-family:monospace;
+border-radius:10px;
 }
 
+#fraseCanto{
+
+position:fixed;
+top:20px;
+left:20px;
+
+width:250px; /* diminui o tamanho do quadrado */
+
+font-size:14px;
+font-weight:bold;
+
+color:#FF0000;
+
+padding:8px 10px; /* diminui o espaço interno */
+
+background:rgba(0,0,0,0.35);
+
+border-radius:8px;
+
+border:1px solid red;
+
+text-shadow:
+0 0 5px red,
+0 0 10px red,
+0 0 20px red,
+0 0 40px red;
+
+box-shadow:
+0 0 8px red,
+0 0 15px red;
+
+animation:ledBrilho 1.5s infinite alternate;
+
+z-index:999;
+
+}
+
+@keyframes ledBrilho{
+
+from{
+text-shadow:
+0 0 5px red,
+0 0 10px red;
+}
+
+to{
+text-shadow:
+0 0 10px red,
+0 0 25px red,
+0 0 40px red;
+}
+
+}
 </style>
 
-</head>
-
 <body>
+<div id="fraseCanto">
+Assim que fizer a compra abra um ticket para retirar seu produto,
+ Lembrando que a entrega demora entre 3 a 5 dias.
+</div>
+<h1 class="logo">DOMN TALENT</h1>
 
-<h1>DOMN TALENT</h1>
+<div id="paginaLoja">
 
+<div class="categoria">
+<h2>Servidores de Jogos</h2>
 <div class="produtos">
 
 <div class="produto">
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF12uI2ooE7VsWBZSc-D76GZA4b1LkDzOItw&s">
-<h3>Foto na tiger</h3>
-<p>R$1,00</p>
-<button onclick="addCarrinho('Foto na tiger',1,00)">Comprar</button>
+<img src="https://upload.wikimedia.org/wikipedia/en/thumb/b/b6/Minecraft_2024_cover_art.png/250px-Minecraft_2024_cover_art.png">
+<h3>Servidor Minecraft</h3>
+<p style="text-decoration:line-through;color:#999;">R$15</p>
+<p style="color:#00ff88;font-size:20px;">R$12 (-20%)</p>
+<button onclick="addCarrinho('Servidor Minecraft',12)">Adicionar</button>
 </div>
 
 <div class="produto">
-<img src="https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs2/424567809/original/a0fe4d3f8922c9ecbe2cc29b7007ae2eb7227e76.jpg">
-<h3>Servidor pronto Discord</h3>
-<p>R$15,00</p>
-<button onclick="addCarrinho('Servidor Discord',15)">Comprar</button>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Roblox_%282025%29_%28App_Icon%29.svg/250px-Roblox_%282025%29_%28App_Icon%29.svg.png">
+<h3>Servidor Roblox</h3>
+<p style="text-decoration:line-through;color:#999;">R$15</p>
+<p style="color:#00ff88;font-size:20px;">R$12 (-20%)</p>
+<button onclick="addCarrinho('Servidor Roblox',12)">Adicionar</button>
 </div>
 
+<div class="produto">
+<img src="https://img.utdstc.com/icon/bcb/fc5/bcbfc5ae3d074d8734b9f51e64f7e95d4325485e0c51661dcf3167e45d768a8d:200">
+<h3>Servidor FiveM</h3>
+<p style="text-decoration:line-through;color:#999;">R$15</p>
+<p style="color:#00ff88;font-size:20px;">R$12 (-20%)</p>
+<button onclick="addCarrinho('Servidor FiveM',12)">Adicionar</button>
 </div>
+
+<div class="produto">
+<img src="https://s2.glbimg.com/UQC8wD2YVhUPqgaYUhhCVqwU2Pg=/0x0:1280x720/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2019/Y/L/lIgTd8SVCHPu8lGXmbJg/novo-logo-league-of-legends.jpg">
+<h3>Servidor LOL</h3>
+<p style="text-decoration:line-through;color:#999;">R$15</p>
+<p style="color:#00ff88;font-size:20px;">R$12 (-20%)</p>
+<button onclick="addCarrinho('Servidor LOL',12)">Adicionar</button>
+</div>
+
+<div class="produto">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSowuLSDeNfvyDg0IGsGLFN2ydvBnS9XUU2A&s">
+<h3>Servidor Clash</h3>
+<p style="text-decoration:line-through;color:#999;">R$15</p>
+<p style="color:#00ff88;font-size:20px;">R$12 (-20%)</p>
+<button onclick="addCarrinho('Servidor Clash',12)">Adicionar</button>
+</div>
+
+<div class="produto">
+<img src="https://cdn.dribbble.com/userupload/17294713/file/still-37b033ea5f1faec742aa466e671fab33.png">
+<h3>Servidor Amigos</h3>
+<p style="text-decoration:line-through;color:#999;">R$15</p>
+<p style="color:#00ff88;font-size:20px;">R$12 (-20%)</p>
+<button onclick="addCarrinho('Servidor Amigos',12)">Adicionar</button>
+</div>
+
+<div class="produto">
+<img src="https://wallpapers.com/images/hd/discord-logo-1zb0msptjane3xdb.jpg">
+<h3>Loja Pronta</h3>
+<p style="text-decoration:line-through;color:#999;">R$25</p>
+<p style="color:#00ff88;font-size:20px;">R$20 (-20%)</p>
+<button onclick="addCarrinho('Loja pronta',20)">Adicionar</button>
+</div>
+
+<div class="produto">
+<img src="https://meialua.net/wp-content/uploads/2023/11/discord.jpg">
+<h3>Loja Personalizada</h3>
+<p style="color:#00ff88;font-size:20px;">R$25</p>
+<button onclick="addCarrinho('Loja Personalizada',25)">Adicionar</button>
+</div>
+</div>
+</div>
+</div>
+
+<button id="botaoCarrinho" onclick="abrirCarrinho()">
+
+<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="white" viewBox="0 0 24 24">
+<path d="M7 4h-2l-1 2h2l3.6 7.59-1.35 2.44c-.16.28-.25.61-.25.97
+0 1.1.9 2 2 2h12v-2h-11.42c-.14 0-.25-.11-.25-.25
+0-.04.01-.07.03-.1l.9-1.65h7.45c.75 0 1.41-.41
+1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48
+0-.55-.45-1-1-1h-14.21l-.94-2zm3
+16c-1.1 0-2 .9-2 2s.9 2 2 2
+2-.9 2-2-.9-2-2-2zm8
+0c-1.1 0-2 .9-2 2s.9 2 2 2
+2-.9 2-2-.9-2-2-2z"/>
+</svg>
+
+<span id="contadorCarrinho">0</span>
+
+</button>
+
+<div id="paginaCarrinho">
+
+<button onclick="voltarLoja()">Voltar</button>
 
 <div id="carrinho">
 
@@ -214,11 +416,9 @@ font-family:monospace;
 
 <div id="listaCarrinho"></div>
 
-<h3>Total: R$ <span id="total">0,00</span></h3>
+<h3>Total: R$ <span id="total">0.00</span></h3>
 
 <button onclick="gerarPix()">Finalizar Compra</button>
-
-</div>
 
 <div id="areaPagamento">
 
@@ -226,99 +426,116 @@ font-family:monospace;
 
 <div id="qrcode"></div>
 
+<textarea id="pixCopia" readonly></textarea>
+
 <br>
 
-<textarea id="pixcode" rows="5" readonly></textarea>
+<button onclick="copiarPix()">Copiar PIX</button>
 
+<div id="msgPix"></div>
+
+</div>
+
+</div>
 </div>
 
 <script>
 
-let carrinho = []
-let total = 0
+let carrinho=[]
+let total=0
+
+function atualizarContador(){
+
+let qtd=0
+
+carrinho.forEach(i=>qtd+=i.qtd)
+
+document.getElementById("contadorCarrinho").innerText=qtd
+
+}
 
 function addCarrinho(nome,valor){
 
-let item = carrinho.find(p => p.nome === nome)
+let item=carrinho.find(p=>p.nome===nome)
 
-if(item){
-item.qtd++
-}else{
-carrinho.push({nome:nome,valor:valor,qtd:1})
-}
+if(item){item.qtd++}
+else{carrinho.push({nome:nome,valor:valor,qtd:1})}
 
-renderCarrinho()
+atualizarContador()
 
-}
-
-function aumentar(nome){
-let item = carrinho.find(p => p.nome === nome)
-item.qtd++
-renderCarrinho()
-}
-
-function diminuir(nome){
-let item = carrinho.find(p => p.nome === nome)
-
-if(item.qtd > 1){
-item.qtd--
-}else{
-carrinho = carrinho.filter(p => p.nome !== nome)
-}
-
-renderCarrinho()
-}
-
-function removerItem(nome){
-carrinho = carrinho.filter(p => p.nome !== nome)
-renderCarrinho()
 }
 
 function renderCarrinho(){
 
-let lista = document.getElementById("listaCarrinho")
+let lista=document.getElementById("listaCarrinho")
+
 lista.innerHTML=""
 
-total = 0
+total=0
 
 carrinho.forEach(item=>{
 
-let subtotal = item.valor * item.qtd
-total += subtotal
+let subtotal=item.valor*item.qtd
 
-let div = document.createElement("div")
+total+=subtotal
+
+let div=document.createElement("div")
+
 div.className="itemCarrinho"
 
-div.innerHTML = `
-<span>
-${item.nome}<br>
-Qtd: ${item.qtd} | R$${subtotal.toLocaleString("pt-BR",{minimumFractionDigits:2})}
-</span>
-
-<div class="controles">
-<button onclick="aumentar('${item.nome}')">+</button>
-<button onclick="diminuir('${item.nome}')">-</button>
-<button class="remover" onclick="removerItem('${item.nome}')">X</button>
-</div>
+div.innerHTML=`
+<span>${item.nome} | Qtd ${item.qtd} | R$${subtotal.toFixed(2)}</span>
+<button onclick="removerItem('${item.nome}')">X</button>
 `
 
 lista.appendChild(div)
 
 })
 
-document.getElementById("total").innerText =
-total.toLocaleString("pt-BR",{minimumFractionDigits:2})
+document.getElementById("total").innerText=total.toFixed(2)
 
 }
 
-/* PIX */
+function removerItem(nome){
+
+carrinho=carrinho.filter(p=>p.nome!==nome)
+
+atualizarContador()
+
+renderCarrinho()
+
+}
+
+function abrirCarrinho(){
+
+document.getElementById("paginaLoja").style.display="none"
+
+document.getElementById("paginaCarrinho").style.display="block"
+
+renderCarrinho()
+
+}
+
+function voltarLoja(){
+
+document.getElementById("paginaCarrinho").style.display="none"
+
+document.getElementById("paginaLoja").style.display="block"
+
+}
+
+/* GERADOR PIX REAL */
 
 function pad(n){
+
 return String(n).padStart(2,'0')
+
 }
 
 function campo(id,v){
-return id + pad(v.length) + v
+
+return id+pad(v.length)+v
+
 }
 
 function crc16(s){
@@ -327,17 +544,21 @@ let crc=0xFFFF
 
 for(let c=0;c<s.length;c++){
 
-crc ^= s.charCodeAt(c)<<8
+crc^=s.charCodeAt(c)<<8
 
 for(let i=0;i<8;i++){
 
-if(crc & 0x8000){
+if(crc&0x8000){
+
 crc=(crc<<1)^0x1021
+
 }else{
+
 crc=(crc<<1)
+
 }
 
-crc &= 0xFFFF
+crc&=0xFFFF
 
 }
 
@@ -349,50 +570,62 @@ return crc.toString(16).toUpperCase().padStart(4,'0')
 
 function gerarPix(){
 
-if(total <= 0){
-alert("Carrinho vazio")
-return
-}
+let chave="SUA_CHAVE_PIX"
 
-document.getElementById("areaPagamento").style.display="block"
+let nome="DOMN TALENT"
 
-let chave = "loksilver7@gmail.com"
-let nome = "Arthur da Nobrega Barbosa"
-let cidade = "SAOPAULO"
+let cidade="SAOPAULO"
 
-let valor = total.toFixed(2)
+let valor=total.toFixed(2)
 
-let gui = campo("00","BR.GOV.BCB.PIX")
-let chavePix = campo("01",chave)
+let gui=campo("00","BR.GOV.BCB.PIX")
 
-let merchant = campo("26", gui + chavePix)
+let chavePix=campo("01",chave)
 
-let payload =
-campo("00","01") +
-merchant +
-campo("52","0000") +
-campo("53","986") +
-campo("54",valor) +
-campo("58","BR") +
-campo("59",nome) +
-campo("60",cidade) +
-campo("62",campo("05","***")) +
+let merchant=campo("26",gui+chavePix)
+
+let payload=
+
+campo("00","01")+
+merchant+
+campo("52","0000")+
+campo("53","986")+
+campo("54",valor)+
+campo("58","BR")+
+campo("59",nome)+
+campo("60",cidade)+
+campo("62",campo("05","***"))+
 "6304"
 
-let crc = crc16(payload)
+let crc=crc16(payload)
 
-let pix = payload + crc
+let pix=payload+crc
 
-document.getElementById("pixcode").value = pix
+document.getElementById("qrcode").innerHTML=""
 
-let qr = document.getElementById("qrcode")
-qr.innerHTML=""
+new QRCode(document.getElementById("qrcode"),{
 
-new QRCode(qr,{
-text: pix,
+text:pix,
 width:250,
 height:250
+
 })
+
+document.getElementById("pixCopia").value=pix
+
+document.getElementById("msgPix").innerText="QR Code gerado! Faca o pagamento."
+
+}
+
+function copiarPix(){
+
+let campo=document.getElementById("pixCopia")
+
+campo.select()
+
+document.execCommand("copy")
+
+document.getElementById("msgPix").innerText="PIX copiado!"
 
 }
 
